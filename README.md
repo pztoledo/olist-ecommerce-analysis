@@ -2,8 +2,8 @@
 
 An end-to-end analysis of the Olist public e-commerce dataset, from raw CSVs to a Power BI dashboard, to understand sales growth, revenue drivers, delivery performance and customer loyalty.
 
-![Olist dashboard](images/dashboard.png)
-
+   ![Olist dashboard](dashboard/Olist_PowerBI.png)
+   
 ## Business questions
 
 1. How are sales growing over time?
