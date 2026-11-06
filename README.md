@@ -3,13 +3,13 @@
 An end-to-end analysis of the Olist public e-commerce dataset, from raw CSVs to a Power BI dashboard, to understand sales growth, revenue drivers, delivery performance and customer loyalty.
 
    ![Olist dashboard](dashboard/Olist_PowerBI.png)
-   
+
 ## Business questions
 
 1. How are sales growing over time?
 2. Which product categories and regions drive revenue?
 3. Does delivery performance affect customer satisfaction?
-4. How loyal are customers, and which groups should marketing target?
+4. How loyal are customers?
 
 ## Key findings and recommendations
 
@@ -107,16 +107,20 @@ Revenue in the dashboard is the sum of item prices, so it excludes freight.
 - **Limited time frame.** The data ends in August 2018, so full-year 2017 and 2018 cannot be compared, and 2016 has very few orders. This dataset is used for learning purposes only.
 - **One marketplace, one sample.** Results describe Olist orders in this period and should not be generalised to Brazilian e-commerce as a whole.
 - **No customer attributes.** There is no data such as gender or age, and the state is where the purchase was made. As a result, 30 customers have two states linked to the same `customer_unique_id`. For simplicity, I used their latest purchase to calculate the repeat-order percentage per state.
-- **Repeat rate is time-limited.** Customers who bought shortly before the data ends had little time to come back, so the 3.1% may be underestimated.
-- **Two revenue definitions.** The Power BI measures use the sum of item prices (without freight), while the SQL queries use total payment value (with freight). There is also no cost or margin data, so profitability cannot be analysed.
+- **Repeat rate is time-limited.** Customers who bought shortly before the data ends had little time to come back, so the 3.1% may be underestimated given the possible growth in 2018 and further.
+- **Two revenue definitions.** The Power BI measures use the sum of item prices (without freight), while the SQL queries use total payment value (with freight). That was something I changed midway and could be more consistent. 
 - **Delivery and reviews show association, not cause.** Late orders get lower reviews, but delivery time also varies with distance, category and seller, which this analysis does not control for.
 - **SP concentration is not adjusted for population.** SP is the most populous state, so its 38% share partly reflects its size.
 - **Geolocation data not used.** The dataset includes a geolocation table that was left out, so distances between sellers and customers are not analysed.
 
+## Use of AI
+- I used an AI assistant (Claude) as a "tutor" while building this project. It helped me understand why Power BI needs one-row-per-order tables (which led to the aggregated tables in `02_aggregated_tables.sql`), and it helped me debug dataset issues such as customers linked to more than one state. I wrote the queries and interpreted the results and recommendations myself.
+
+ 
+
 ## Possible next steps
 
 - Compare repeat-purchase rates for customers whose first order was late versus on time.
-- Run a cohort analysis (retention by first-purchase month).
 - Normalise revenue by state population to see which states are under-served.
 - Use the geolocation table to map delivery time by region and test whether seller–customer distance explains late deliveries.
 
